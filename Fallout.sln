@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Fallout", "Fallout\Fallout.vcxproj", "{76BAAF9A-A87B-4416-9DC1-C8FEA6308833}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{76BAAF9A-A87B-4416-9DC1-C8FEA6308833}.Debug|x64.ActiveCfg = Debug|x64
+		{76BAAF9A-A87B-4416-9DC1-C8FEA6308833}.Debug|x64.Build.0 = Debug|x64
+		{76BAAF9A-A87B-4416-9DC1-C8FEA6308833}.Debug|x86.ActiveCfg = Debug|Win32
+		{76BAAF9A-A87B-4416-9DC1-C8FEA6308833}.Debug|x86.Build.0 = Debug|Win32
+		{76BAAF9A-A87B-4416-9DC1-C8FEA6308833}.Release|x64.ActiveCfg = Release|x64
+		{76BAAF9A-A87B-4416-9DC1-C8FEA6308833}.Release|x64.Build.0 = Release|x64
+		{76BAAF9A-A87B-4416-9DC1-C8FEA6308833}.Release|x86.ActiveCfg = Release|Win32
+		{76BAAF9A-A87B-4416-9DC1-C8FEA6308833}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {375A1F89-6193-46FE-BA43-2CB27DDEE0BE}
+	EndGlobalSection
+EndGlobal
