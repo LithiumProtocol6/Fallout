@@ -17,10 +17,10 @@ public:
 	bool loadTMX(const char* file, char* tilesetPath, int pathSize);//загрузка данных по карте их TMX файла
 	int** getTilesData();
 	int getTileWidth();
-	int getTileHeigth();
+	int getTileHeight(); 
 	int* getOffsetsX();
 	int* getOffsetsY();
 	int* getLayersWidth();
-	int* getLayersHeigth();
+	int* getLayersHeight();
 	int getLayersCount();
 };

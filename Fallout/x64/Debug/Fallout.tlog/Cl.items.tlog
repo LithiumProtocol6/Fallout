@@ -1,2 +1,4 @@
-C:\Users\danil\source\repos\Fallout\Fallout\Fallout.cpp;C:\Users\danil\source\repos\Fallout\Fallout\x64\Debug\Fallout.obj
-C:\Users\danil\source\repos\Fallout\Fallout\tinyxml2.cpp;C:\Users\danil\source\repos\Fallout\Fallout\x64\Debug\tinyxml2.obj
+C:\Fallout\Fallout\Fallout.cpp;C:\Fallout\Fallout\x64\Debug\Fallout.obj
+C:\Fallout\Fallout\Game.cpp;C:\Fallout\Fallout\x64\Debug\Game.obj
+C:\Fallout\Fallout\MapLoad.cpp;C:\Fallout\Fallout\x64\Debug\MapLoad.obj
+C:\Fallout\Fallout\tinyxml2.cpp;C:\Fallout\Fallout\x64\Debug\tinyxml2.obj
