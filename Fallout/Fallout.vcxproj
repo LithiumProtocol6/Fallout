@@ -137,10 +137,12 @@
   <ItemGroup>
     <ClCompile Include="Fallout.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="MapLoad.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
+    <ClInclude Include="MapLoad.h" />
     <ClInclude Include="tinyxml2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
