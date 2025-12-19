@@ -1,2 +1,10 @@
 ﻿  Fallout.cpp
-  Fallout.vcxproj -> C:\Users\danil\source\repos\Fallout\x64\Debug\Fallout.exe
+  Game.cpp
+  MapLoad.cpp
+C:\Fallout\Fallout\Game.cpp(34,5): error C2660: Game::initMap: функция не принимает 0 аргументов
+      C:\Fallout\Fallout\Game.cpp(16,12):
+       см. объявление "Game::initMap"
+      C:\Fallout\Fallout\Game.cpp(34,5):
+      при попытке сопоставить список аргументов "()"
+  
+  Создание кода...

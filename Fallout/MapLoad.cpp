@@ -111,7 +111,7 @@ int mapData::getTileWidth()
 {
     return tileW;
 }
-int mapData::getTileHeigth()
+int mapData::getTileHeight()
 {
     return tileH;
 }
@@ -127,7 +127,7 @@ int* mapData::getLayersWidth()
 {
     return layerW;
 }
-int* mapData::getLayersHeigth()
+int* mapData::getLayersHeight()
 {
     return layerH;
 }
