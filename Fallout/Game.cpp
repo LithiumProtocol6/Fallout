@@ -7,6 +7,8 @@ void Game:: initWindow(int w, int h, const char* name)
     videoMode.size.x = w;
     videoMode.size.y = h;
     window = new sf::RenderWindow(videoMode,name);
+    window->setFramerateLimit(60);
+    window->setVerticalSyncEnabled(false);
 }
 void Game::initVar()
 {
@@ -31,10 +33,37 @@ Game::Game(int w, int h, const char* name)
 {
     initVar();
     initWindow(w, h, name);
-    initMap();
 }
 Game:: ~Game()
 {
     delete window;
+}
+
+void Game::update()
+{
+    while (const std::optional ev = window->pollEvent()) {
+        if (ev->is<sf::Event::Closed>()) {
+            window->close();
+        }
+        if (ev->is<sf::Event::KeyPressed>()&&sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)) {
+            window->close();
+        }
+    }
+}
+
+void Game::render()
+{
+    window->clear();
+
+    window->display();
+}
+
+void Game::run()
+{
+    while (window->isOpen())
+    {
+        update();
+        render();
+    }
 }
 

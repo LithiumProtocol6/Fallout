@@ -1,12 +1,7 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/Audio.hpp>
-#include <SFML/Network.hpp>
 #include <iostream>
 #include "MapLoad.h"
-
+#include "Player.h"
 class Game {
 private:
 
@@ -39,5 +34,6 @@ public:
 	//Функции
 	void update();
 	void render();
+	void run();
 
 };
