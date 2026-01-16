@@ -9,6 +9,7 @@ mapData::mapData()
     layerW = nullptr;
     layerH = nullptr;
     layersCount = 0;
+    tilesPerRow = 0;
 }
 mapData::~mapData()
 {
@@ -44,7 +45,7 @@ void mapData::parseCSV(const char* text, int* dest, int maxCount)
         dest[n++] = atoi(num);
     }
 }
-bool mapData::loadTMX(const char* file, char* tilesetPath, int pathSize)
+bool mapData::loadTMX(const char* file)
 {
     tinyxml2::XMLDocument doc;
     if (doc.LoadFile(file) != tinyxml2::XML_SUCCESS) {
@@ -78,19 +79,20 @@ bool mapData::loadTMX(const char* file, char* tilesetPath, int pathSize)
     const char* imgSrc = imgEl->Attribute("source");
     if (!imgSrc) { std::cout << "TSX image has no source" << std::endl; return false; }
 
+    if (!tileset.loadFromFile(imgSrc)) { std::cout << "TSX image has no source" << std::endl; return false; }
+    tilesPerRow = tileset.getSize().x / tileW;
     size_t len = strlen(imgSrc);
-    if (len >= pathSize) {
-        std::cout << "tilesetPath buffer too small! Needed: " << len + 1 << std::endl;
-        return false;
-    }
-    strcpy_s(tilesetPath, pathSize, imgSrc);
 
     int li = 0;
     for (tinyxml2::XMLElement* lay = map->FirstChildElement("layer"); lay != nullptr; lay = lay->NextSiblingElement("layer")) {
         layersCount++;
     }
     tiles = new int* [layersCount];
-    for (tinyxml2::XMLElement* lay = map->FirstChildElement("layer"); lay != nullptr; lay = lay->NextSiblingElement("layer"), ++li)
+    layerW = new int[layersCount];
+    layerH = new int[layersCount];
+    offsetX = new int[layersCount];
+    offsetY = new int[layersCount];
+    for (tinyxml2::XMLElement* lay = map->FirstChildElement("layer"); lay != nullptr; lay = lay->NextSiblingElement("layer"), li++)
     {
         layerW[li] = lay->IntAttribute("width");
         layerH[li] = lay->IntAttribute("height");
@@ -115,23 +117,32 @@ int mapData::getTileHeight()
 {
     return tileH;
 }
-int* mapData::getOffsetsX()
+const int* mapData::getOffsetsX()
 {
     return offsetX;
 }
-int* mapData::getOffsetsY()
+const int* mapData::getOffsetsY()
 {
     return offsetY;
 }
-int* mapData::getLayersWidth()
+const int* mapData::getLayersWidth()
 {
     return layerW;
 }
-int* mapData::getLayersHeight()
+const int* mapData::getLayersHeight()
 {
     return layerH;
 }
 int mapData::getLayersCount()
 {
     return layersCount;
+}
+int mapData::getTilesPerRow()
+{
+    return tilesPerRow;
+}
+
+sf::Texture& mapData::getTileset()
+{
+    return tileset;
 }

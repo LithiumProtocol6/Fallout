@@ -5,9 +5,8 @@
 int main()
 {
     //пока класс делается тут будет временно пусто :(
-    Game fallout(600,800,"Fallout");
+    Game fallout(800,600,"Fallout");
     fallout.run();
-    sf::Texture texture;
     /*
     sf::RenderWindow window(sf::VideoMode({ 200, 200 }), "SFML works!");
     sf::CircleShape shape(100.f);
