@@ -13,12 +13,17 @@ mapData::mapData()
 }
 mapData::~mapData()
 {
-    for (int i = 0; i < layersCount; i++) { if (tiles[i])delete[] tiles[i]; }
+    for (int i = 0; i < layersCount; i++) { if (tiles[i])delete[] tiles[i]; std::cout << "tiles " << i << " deleted\n"; }
     if (tiles) delete[] tiles;
+    std::cout << "tiles deleted\n";
     if (offsetX) delete[] offsetX;
+    std::cout << "offsetX deleted\n";
     if (offsetY) delete[] offsetY;
+    std::cout << "offsetY deleted\n";
     if (layerH) delete[] layerH;
+    std::cout << "layerH deleted\n";
     if (layerW) delete[] layerW;
+    std::cout << "layerW deleted\n";
 }
 void mapData::parseCSV(const char* text, int* dest, int maxCount)
 {
@@ -47,6 +52,18 @@ void mapData::parseCSV(const char* text, int* dest, int maxCount)
 }
 bool mapData::loadTMX(const char* file)
 {
+    for (int i = 0; i < layersCount; i++) { if (tiles[i])delete[] tiles[i]; std::cout << "tiles " << i << " deleted\n"; }
+    if (tiles) delete[] tiles;
+    std::cout << "tiles deleted\n";
+    if (offsetX) delete[] offsetX;
+    std::cout << "offsetX deleted\n";
+    if (offsetY) delete[] offsetY;
+    std::cout << "offsetY deleted\n";
+    if (layerH) delete[] layerH;
+    std::cout << "layerH deleted\n";
+    if (layerW) delete[] layerW;
+    std::cout << "layerW deleted\n";
+
     tinyxml2::XMLDocument doc;
     if (doc.LoadFile(file) != tinyxml2::XML_SUCCESS) {
         std::cout << "TMX load error: " << file << std::endl;
@@ -84,6 +101,7 @@ bool mapData::loadTMX(const char* file)
     size_t len = strlen(imgSrc);
 
     int li = 0;
+    layersCount = 0;
     for (tinyxml2::XMLElement* lay = map->FirstChildElement("layer"); lay != nullptr; lay = lay->NextSiblingElement("layer")) {
         layersCount++;
     }

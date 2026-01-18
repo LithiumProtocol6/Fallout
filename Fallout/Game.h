@@ -16,7 +16,7 @@ private:
 	void renderMap();//рендер карты
 	bool isAtMap=false;//отрисовывать ли карту
 	bool newMap=true;
-	std::string mapPath = "maps/testMap.tmx";
+	std::string mapPath = "maps/map1.tmx";
 	//Камера
 	float cameraScale = 1.0;//приближение/отдаление камеры
 	sf::View camera;//камера

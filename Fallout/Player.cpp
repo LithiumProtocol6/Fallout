@@ -2,11 +2,10 @@
 
 Player::Player()
 {
-	if(!texture.loadFromFile("player.png"))
-	sprite= new sf::Sprite(texture);
+	name = "Johnny Johnson";
 }
 
 Player::~Player()
 {
-	delete sprite;
+	if(sprite) delete sprite;
 }

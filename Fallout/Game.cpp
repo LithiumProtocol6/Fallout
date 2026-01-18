@@ -37,7 +37,7 @@ void Game::renderMap() {
                 int srcX = (gid % map.getTilesPerRow()) * map.getTileWidth();
                 int srcY = (gid / map.getTilesPerRow()) * map.getTileHeight();
                 float screenX = ((x - y) * (map.getTileWidth())) + map.getOffsetsX()[li]*3.5;
-                float screenY = ((x + y) * (map.getTileHeight()))/2.0f + map.getOffsetsY()[li]*3.5f;
+                float screenY = ((x + y) * (map.getTileHeight())) / 2.0f + map.getOffsetsY()[li]*1.75f;
                 sf::IntRect src({ srcX,srcY }, { map.getTileWidth(), map.getTileHeight() });
                 tile.setTextureRect(src);
                 tile.setScale({ (float)map.getTileWidth()/15.0f, (float)map.getTileHeight()/15.0f });
@@ -77,7 +77,8 @@ Game::Game(int w, int h, const char* name)
 }
 Game:: ~Game()
 {
-    if(window)delete window;
+    if (window) { delete window; std::cout << "window deleted\n"; }
+
 }
 
 sf::RenderWindow& Game::getWindow() 
@@ -110,6 +111,11 @@ void Game::update()
             if (keyPressed->scancode == sf::Keyboard::Scan::A) {camera.move({ -25,0 });}
             if (keyPressed->scancode == sf::Keyboard::Scan::S) {camera.move({ 0,25 });}
             if (keyPressed->scancode == sf::Keyboard::Scan::D) {camera.move({ 25,0 });}
+            if (keyPressed->scancode == sf::Keyboard::Scan::Space) {
+                if (mapPath == "maps/map1.tmx") { mapPath = "maps/testMap.tmx"; }
+                else mapPath = "maps/map1.tmx";
+                newMap = true;
+            }
         }
         if (ev->is<sf::Event::MouseWheelScrolled>()) {
             zoom(-0.5f*ev->getIf<sf::Event::MouseWheelScrolled>()->delta);

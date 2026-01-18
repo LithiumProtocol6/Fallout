@@ -6,16 +6,18 @@
 #include <SFML/Network.hpp>
 class Player
 {
+	std::string name;
 	int HP;
 	int maxHP;
 	sf::Texture texture;
+	int currentFrame;
+	int maxFrames;
+	int frameDistance;
 	sf::Sprite* sprite;
-	void initSprite();
-	void initTexture();
 public:
 	Player();
 	~Player();
-	void update();
-	void render(sf::RenderTarget& target);
+	void initTexture(const char* name);
+	void updateAnimationSprite(int frame,int x,int y);
 };
 
