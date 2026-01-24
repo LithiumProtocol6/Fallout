@@ -4,25 +4,8 @@
 
 int main()
 {
-    //пока класс делается тут будет временно пусто :(
-    Game fallout(800,600,"Fallout");
+    Game fallout(1600,1200,"Fallout");
+    std::string maps[2] = { "maps/testMap.tmx","maps/map1.tmx"};
+    fallout.setMaps(maps,2);
     fallout.run();
-    /*
-    sf::RenderWindow window(sf::VideoMode({ 200, 200 }), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
-    while (window.isOpen())
-    {
-        while (const std::optional event = window.pollEvent())
-        {
-            if (event->is<sf::Event::Closed>()) {
-                window.close();
-            }
-        }
-
-        window.clear();
-        window.draw(shape);
-        window.display();
-    }
-    */
 }

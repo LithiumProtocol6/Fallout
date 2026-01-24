@@ -95,11 +95,15 @@ mapData& Game::getMap() //чтобы кучу геттеров не пропис
 {
     return map;
 }
-
+void Game::setMaps(std::string* _maps,int _size) {
+    mapSize = _size;
+    maps = new std::string[mapSize];
+    for (int i = 0; i < mapSize; i++) maps = _maps;
+}
 void Game::update()
 {
     if (newMap) {
-        initMap(mapPath);
+        initMap(maps[currentMap]);
         isAtMap = true;
         newMap = false;
     }
@@ -112,8 +116,8 @@ void Game::update()
             if (keyPressed->scancode == sf::Keyboard::Scan::S) {camera.move({ 0,25 });}
             if (keyPressed->scancode == sf::Keyboard::Scan::D) {camera.move({ 25,0 });}
             if (keyPressed->scancode == sf::Keyboard::Scan::Space) {
-                if (mapPath == "maps/map1.tmx") { mapPath = "maps/testMap.tmx"; }
-                else mapPath = "maps/map1.tmx";
+                if (currentMap== 0) { currentMap = 1; }
+                else currentMap = 0;
                 newMap = true;
             }
         }

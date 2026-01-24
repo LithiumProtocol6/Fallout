@@ -1,23 +1,11 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/Audio.hpp>
-#include <SFML/Network.hpp>
-class Player
+#include "Entity.h"
+class Player: public Entity
 {
-	std::string name;
-	int HP;
-	int maxHP;
-	sf::Texture texture;
-	int currentFrame;
-	int maxFrames;
-	int frameDistance;
-	sf::Sprite* sprite;
+private:
+
 public:
-	Player();
-	~Player();
-	void initTexture(const char* name);
-	void updateAnimationSprite(int frame,int x,int y);
+
 };
 
