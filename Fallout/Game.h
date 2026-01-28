@@ -23,6 +23,9 @@ private:
 	float cameraScale = 1.0;//приближение/отдаление камеры
 	sf::View camera;//камера
 	void zoom(float delta);//зумить камеру
+	//Игрок
+	Entity player(20,20);
+	//
 public:
 	//Конструкторы/деструкторы
 	Game();

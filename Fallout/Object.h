@@ -10,24 +10,33 @@ class Object
 private:
 	Coordinates tile;
 	Coordinates renderCoordinates;
-	int width;
-	int length;
 	Animation standingAnimation;
 	Animation walkingAnimation;
 	Coordinates tileWalkingTo;
 	Coordinates* path;
+	int pathSize;
 	bool isWalking;
+	int walkingOffsetX;
+	int walkingOffsetY;
+	int walkingSpeed;
 public:
-	void initAnimation(std::string& _texture, int _rows, int _framesInARow, int _maxFrames, int _waitingTilNextFrame);
-	Object(int _x,int _y,int _width,int _length);
+	void initAnimation(std::string& _texture, int _rows, int _framesInARow, int _maxFrames, int _waitingTilNextFrame,int animNum);
+	Object(int _x,int _y);
 	~Object();
-	void renderObject(); 
 	int getTileX();
 	int getTileY();
 	void setRenderX(int _x);
-	void setRendeY(int _y);
+	void setRenderY(int _y);
 	void setPath(int _x, int _y);
 	void setWalking(bool _walking);
+	bool getWalking();
 	sf::Sprite& getSprite();
+	void setWalkingOffsetX(int _walkingOffsetX);
+	void setWalkingOffsetY(int _walkingOffsetY);
+	void setWalkingSpeed(int _walkingSpeed);
+	int getWalkingOffsetX();
+	int getWalkingOffsetY();
+	int getWalkingSpeed();
+
 };
 

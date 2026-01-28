@@ -17,6 +17,7 @@ private:
 public:
 	void setAnimation(std::string& _texture, int _rows, int _framesInARow, int _maxFrames, int _waitingTilNextFrame);
 	Animation(std::string& _texture,int _rows, int _framesInARow, int _maxFrames, int _waitingTilNextFrame);
+	Animation();
 	sf::Sprite& getFrame();
 };
 

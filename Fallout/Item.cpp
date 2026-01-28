@@ -5,5 +5,5 @@ Item::Item(std::string _name, int _damage, int _range, int _quantity, std::strin
 }
 Item::Item():damage(0),range(0),quantity(0) {
 	name = "Item has no name";
-	texture.loadFromFile("Textures/NoTextureItem.png");
+	texture.loadFromFile("Textures/NoTexture.png");
 }

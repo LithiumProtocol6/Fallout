@@ -78,7 +78,7 @@ Game::Game(int w, int h, const char* name)
 Game:: ~Game()
 {
     if (window) { delete window; std::cout << "window deleted\n"; }
-
+    if (maps) { delete[] maps; std::cout << "maps deleted\n"; }
 }
 
 sf::RenderWindow& Game::getWindow() 
@@ -98,7 +98,7 @@ mapData& Game::getMap() //чтобы кучу геттеров не пропис
 void Game::setMaps(std::string* _maps,int _size) {
     mapSize = _size;
     maps = new std::string[mapSize];
-    for (int i = 0; i < mapSize; i++) maps = _maps;
+    for (int i = 0; i < mapSize; i++) maps[i] = _maps[i];
 }
 void Game::update()
 {
