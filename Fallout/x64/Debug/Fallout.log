@@ -1,2 +1,7 @@
-﻿  Fallout.cpp
-  Fallout.vcxproj -> C:\Users\danil\source\repos\Fallout\x64\Debug\Fallout.exe
+﻿  Entity.cpp
+C:\Fallout\Fallout\Entity.cpp(113,13): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+  Fallout.cpp
+  Game.cpp
+C:\Fallout\Fallout\Game.cpp(40,31): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+  Создание кода...
+  Fallout.vcxproj -> C:\Fallout\x64\Debug\Fallout.exe

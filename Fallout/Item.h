@@ -15,5 +15,19 @@ public:
 	Item(std::string _name, int _damage, int _range, int _quantity, std::string _texture);
 	Item();
 	void operator=(Item& other);
+
+	//Геттеры
+	int getRange() const 
+	{ 
+		return range; 
+	}
+	int getDamage() const 
+	{ 
+		return damage; 
+	}
+	std::string getName() const 
+	{ 
+		return name; 
+	}
 };
 

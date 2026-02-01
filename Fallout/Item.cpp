@@ -15,3 +15,4 @@ void Item::operator=(Item& other) {
 	quantity = other.quantity;
 	texture = other.texture;
 }
+
