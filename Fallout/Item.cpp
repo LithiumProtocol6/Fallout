@@ -7,3 +7,11 @@ Item::Item():damage(0),range(0),quantity(0) {
 	name = "Item has no name";
 	texture.loadFromFile("Textures/NoTexture.png");
 }
+
+void Item::operator=(Item& other) {
+	name = other.name;
+	damage = other.damage;
+	range = other.range;
+	quantity = other.quantity;
+	texture = other.texture;
+}

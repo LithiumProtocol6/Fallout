@@ -7,13 +7,13 @@ struct Coordinates {
 };
 class Object
 {
-private:
+protected:
 	Coordinates tile;
 	Coordinates renderCoordinates;
 	Animation standingAnimation;
 	Animation walkingAnimation;
 	Coordinates tileWalkingTo;
-	Coordinates* path;
+	std::vector<Coordinates> path;
 	int pathSize;
 	bool isWalking;
 	int walkingOffsetX;
@@ -22,6 +22,7 @@ private:
 public:
 	void initAnimation(std::string& _texture, int _rows, int _framesInARow, int _maxFrames, int _waitingTilNextFrame,int animNum);
 	Object(int _x,int _y);
+	Object();
 	~Object();
 	int getTileX();
 	int getTileY();

@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include "MapLoad.h"
-#include "Player.h"
+#include "Entity.h"
 class Game {
 private:
 
@@ -16,7 +16,7 @@ private:
 	void renderMap();//рендер карты
 	bool isAtMap=false;//отрисовывать ли карту
 	bool newMap=true;
-	std::string* maps;
+	std::vector<std::string> maps;
 	int currentMap;
 	int mapSize;
 	//Камера
@@ -24,8 +24,13 @@ private:
 	sf::View camera;//камера
 	void zoom(float delta);//зумить камеру
 	//Игрок
-	Entity player(20,20);
-	//
+	Entity player = Entity(20, 20, 100, 100, 10, 10, 50, false);
+	//Все сущности
+	std::vector<std::vector<Entity>> entities;
+	int entitySize=0;
+	std::vector<int> entitiesSize;
+	void initEntities(std::vector<Entity> _entities,int _entitySize,int i);
+	void initAllEntities(int _entitySize);
 public:
 	//Конструкторы/деструкторы
 	Game();
@@ -38,7 +43,8 @@ public:
 	mapData& getMap();
 
 	//Функции
-	void setMaps(std::string* _maps, int _size);
+	void setMaps(std::vector<std::string> _maps, int _size);
+	void setEntities(std::vector<std::vector<Entity>> _entities, std::vector<int> _entitiesSize, int _entitySize);
 	void update();
 	void render();
 	void run();

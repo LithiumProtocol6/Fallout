@@ -12,6 +12,7 @@ void Game:: initWindow(int w, int h, const char* name)
 void Game::initVar()
 {
     window = nullptr;
+    entitySize = 0;
 }
 
 bool Game::initMap(const std::string& filename)
@@ -65,6 +66,20 @@ void Game:: zoom(float delta)
 
     camera.setSize( window->getDefaultView().getSize() * cameraScale);
 }
+void Game::initEntities(std::vector<Entity> _entities, int _entitySize, int i)
+{
+    if (i >= entitySize || _entitySize <= 0 || _entities.empty()) return;
+    entitiesSize[i] = _entitySize;
+    entities[i].resize(entitiesSize[i]);
+    entities[i] = _entities;
+}
+void Game::initAllEntities(int _entitySize)
+{
+    if (_entitySize <= 0) return;
+    entitySize = _entitySize;
+    entities.resize(entitySize);
+    entitiesSize.resize(entitySize);
+}
 Game::Game()
 {
     initVar();
@@ -75,10 +90,10 @@ Game::Game(int w, int h, const char* name)
     initVar();
     initWindow(w, h, name);
 }
-Game:: ~Game()
+Game::~Game()
 {
-    if (window) { delete window; std::cout << "window deleted\n"; }
-    if (maps) { delete[] maps; std::cout << "maps deleted\n"; }
+    delete window;
+    window = nullptr;
 }
 
 sf::RenderWindow& Game::getWindow() 
@@ -95,10 +110,19 @@ mapData& Game::getMap() //чтобы кучу геттеров не пропис
 {
     return map;
 }
-void Game::setMaps(std::string* _maps,int _size) {
+void Game::setMaps(std::vector<std::string> _maps,int _size) {
     mapSize = _size;
-    maps = new std::string[mapSize];
-    for (int i = 0; i < mapSize; i++) maps[i] = _maps[i];
+    maps.resize(mapSize);
+    maps = _maps;
+}
+void Game::setEntities(std::vector<std::vector<Entity>> _entities, std::vector<int> _entitiesSize, int _entitySize)
+{
+    initAllEntities(_entitySize);
+    std::cout << "AllEntities init" << std::endl;
+    for (int i = 0; i < entitySize; i++) {
+        initEntities(_entities[i], _entitiesSize[i], i);
+        std::cout << "Entity" << i<< " init" << std::endl;
+    }
 }
 void Game::update()
 {

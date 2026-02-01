@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <string>
+#include <vector>
 class Item
 {
 private:
@@ -13,5 +14,6 @@ private:
 public:
 	Item(std::string _name, int _damage, int _range, int _quantity, std::string _texture);
 	Item();
+	void operator=(Item& other);
 };
 

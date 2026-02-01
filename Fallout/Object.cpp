@@ -16,9 +16,19 @@ Object::Object(int _x, int _y)
     walkingSpeed = 0;
 }
 
+Object::Object()
+{
+    tile.x = 0;
+    tile.y = 0;
+    isWalking = 0;
+    int pathSize = 0;
+    walkingOffsetX = 0;
+    walkingOffsetY = 0;
+    walkingSpeed = 0;
+}
+
 Object::~Object()
 {
-	if (path) delete[] path;
 }
 
 int Object::getTileX()
@@ -47,19 +57,16 @@ void Object::setPath(int _x, int _y)
     int dy = std::abs(_y - tile.x);
     int sx = (tile.x < _x) ? 1 : -1;
     int sy = (tile.y < _y) ? 1 : -1;
-
     int size = dx + dy + 1;
-    path = new Coordinates[size];
-
     int cx = tile.x;
     int cy = tile.y;
     int err = dx - dy;
     int i = 0;
-
+    if (!path.empty()) path.clear();
+    path.resize(size);
     path[i].x = cx;
     path[i].y = cy;
     ++i;
-
     while (cx != _x || cy != _y) {
         int e2 = 2 * err;
         if (e2 > -dy) {
@@ -74,9 +81,8 @@ void Object::setPath(int _x, int _y)
             err -= dy;
             cx += sx;
         }
-
-        path[i].x = cx;
-        path[i].y = cy;
+        Coordinates c = { cx,cy };
+        path.emplace_back(c);
         ++i;
     }
     size = i;

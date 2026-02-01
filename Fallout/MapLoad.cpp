@@ -1,31 +1,15 @@
 #include "MapLoad.h"
 mapData::mapData()
 {
-    tiles = nullptr;
     tileW = 0;
     tileH = 0;
-    offsetX = nullptr;
-    offsetY = nullptr;
-    layerW = nullptr;
-    layerH = nullptr;
     layersCount = 0;
     tilesPerRow = 0;
 }
 mapData::~mapData()
 {
-    for (int i = 0; i < layersCount; i++) { if (tiles[i])delete[] tiles[i]; std::cout << "tiles " << i << " deleted\n"; }
-    if (tiles) delete[] tiles;
-    std::cout << "tiles deleted\n";
-    if (offsetX) delete[] offsetX;
-    std::cout << "offsetX deleted\n";
-    if (offsetY) delete[] offsetY;
-    std::cout << "offsetY deleted\n";
-    if (layerH) delete[] layerH;
-    std::cout << "layerH deleted\n";
-    if (layerW) delete[] layerW;
-    std::cout << "layerW deleted\n";
 }
-void mapData::parseCSV(const char* text, int* dest, int maxCount)
+void mapData::parseCSV(const char* text, std::vector<int>& dest, int maxCount)
 {
     const char* p = text;
     int n = 0;
@@ -50,22 +34,21 @@ void mapData::parseCSV(const char* text, int* dest, int maxCount)
         dest[n++] = atoi(num);
     }
 }
-bool mapData::loadTMX(const char* file)
+bool mapData::loadTMX(std::string file)
 {
-    for (int i = 0; i < layersCount; i++) { if (tiles[i])delete[] tiles[i]; std::cout << "tiles " << i << " deleted\n"; }
-    if (tiles) delete[] tiles;
+    for (int i = 0; i < layersCount; i++) { if (!tiles[i].empty())tiles[i].clear(); std::cout << "tiles " << i << " deleted\n"; }
     std::cout << "tiles deleted\n";
-    if (offsetX) delete[] offsetX;
+    if (!offsetX.empty()) offsetX.clear();
     std::cout << "offsetX deleted\n";
-    if (offsetY) delete[] offsetY;
+    if (!offsetY.empty()) offsetY.clear();
     std::cout << "offsetY deleted\n";
-    if (layerH) delete[] layerH;
+    if (!layerH.empty()) layerH.clear();
     std::cout << "layerH deleted\n";
-    if (layerW) delete[] layerW;
+    if (!layerW.empty()) layerW.clear();
     std::cout << "layerW deleted\n";
 
     tinyxml2::XMLDocument doc;
-    if (doc.LoadFile(file) != tinyxml2::XML_SUCCESS) {
+    if (doc.LoadFile(file.c_str()) != tinyxml2::XML_SUCCESS) {
         std::cout << "TMX load error: " << file << std::endl;
         return false;
     }
@@ -105,25 +88,25 @@ bool mapData::loadTMX(const char* file)
     for (tinyxml2::XMLElement* lay = map->FirstChildElement("layer"); lay != nullptr; lay = lay->NextSiblingElement("layer")) {
         layersCount++;
     }
-    tiles = new int* [layersCount];
-    layerW = new int[layersCount];
-    layerH = new int[layersCount];
-    offsetX = new int[layersCount];
-    offsetY = new int[layersCount];
+    tiles.resize(layersCount);
+    layerW.resize(layersCount);
+    layerH.resize(layersCount);
+    offsetX.resize(layersCount);
+    offsetY.resize(layersCount);
     for (tinyxml2::XMLElement* lay = map->FirstChildElement("layer"); lay != nullptr; lay = lay->NextSiblingElement("layer"), li++)
     {
         layerW[li] = lay->IntAttribute("width");
         layerH[li] = lay->IntAttribute("height");
         offsetX[li] = lay->IntAttribute("offsetx");
         offsetY[li] = lay->IntAttribute("offsety");
-        tiles[li] = new int[layerW[li] * layerH[li]];
         tinyxml2::XMLElement* data = lay->FirstChildElement("data");
+        tiles[li].resize(layerW[li] * layerH[li]);
         if (!data) { std::cout << "Layer %d has no <data>" << li << std::endl; return false; }
         parseCSV(data->GetText(), tiles[li], layerW[li] * layerH[li]);
     }
     return true;
 }
-int** mapData::getTilesData()
+std::vector<std::vector<int>> mapData::getTilesData()
 {
     return tiles;
 }
@@ -135,19 +118,19 @@ int mapData::getTileHeight()
 {
     return tileH;
 }
-const int* mapData::getOffsetsX()
+const std::vector<int> mapData::getOffsetsX()
 {
     return offsetX;
 }
-const int* mapData::getOffsetsY()
+const std::vector<int> mapData::getOffsetsY()
 {
     return offsetY;
 }
-const int* mapData::getLayersWidth()
+const std::vector<int> mapData::getLayersWidth()
 {
     return layerW;
 }
-const int* mapData::getLayersHeight()
+const std::vector<int> mapData::getLayersHeight()
 {
     return layerH;
 }
