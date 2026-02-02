@@ -13,6 +13,7 @@ void Game::initVar()
 {
     window = nullptr;
     entitySize = 0;
+    entityLayer = 0;
 }
 
 bool Game::initMap(const std::string& filename)
@@ -29,6 +30,7 @@ bool Game::initMap(const std::string& filename)
 
 void Game::renderMap() {
     sf::Sprite tile(map.getTileset());
+    sf::Sprite entity = player.getSprite();
     for (int li = 0; li < map.getLayersCount(); ++li) {//отображение карты
         for (int y = 0; y < map.getLayersHeight()[li]; ++y) {
             for (int x = 0; x < map.getLayersWidth()[li]; ++x) {
@@ -44,6 +46,20 @@ void Game::renderMap() {
                 tile.setScale({ (float)map.getTileWidth()/15.0f, (float)map.getTileHeight()/15.0f });
                 tile.setPosition({ screenX, screenY});
                 window->draw(tile);
+                //Рендер сущностей
+                if (player.getTileX() == x && player.getTileY() == y) {
+                    entity = player.getSprite();
+                    entity.setScale({ (float)entity.getScale().x *((float)map.getTileWidth()/(float)entity.getScale().x),(float)entity.getScale().y * ((float)map.getTileWidth() / (float)entity.getScale().y) });
+                    entity.setPosition({ screenX,screenY + entity.getScale().y-map.getTileHeight()});
+                    window->draw(entity);
+                }
+                for (int i = 0; i < entitiesSize[currentMap]; i++) {
+                    if (entities[currentMap][i].getTileX() == x && entities[currentMap][i].getTileY() == y && li == entityLayer) {
+                        entity = entities[currentMap][i].getSprite();
+                        entity.setPosition({ screenX,screenY });
+                        window->draw(entity);
+                    }
+                }
                 /*
                 for (int i = 0; i < pathSize; i++) {//остатки старого кода, скоро переделаю
                     if (x == path[0][i] && y == path[1][i]) {
@@ -94,6 +110,7 @@ Game::~Game()
 {
     delete window;
     window = nullptr;
+    std::cout << "window deleted" << std::endl;
 }
 
 sf::RenderWindow& Game::getWindow() 
@@ -115,7 +132,7 @@ void Game::setMaps(std::vector<std::string> _maps,int _size) {
     maps.resize(mapSize);
     maps = _maps;
 }
-void Game::setEntities(std::vector<std::vector<Entity>> _entities, std::vector<int> _entitiesSize, int _entitySize)
+void Game::setEntities(std::vector<std::vector<Entity>> _entities, std::vector<int> _entitiesSize, int _entitySize, int _entityLayer)
 {
     initAllEntities(_entitySize);
     std::cout << "AllEntities init" << std::endl;
@@ -123,6 +140,11 @@ void Game::setEntities(std::vector<std::vector<Entity>> _entities, std::vector<i
         initEntities(_entities[i], _entitiesSize[i], i);
         std::cout << "Entity" << i<< " init" << std::endl;
     }
+    entityLayer = _entityLayer;
+}
+void Game::setPlayer(Entity p)
+{
+    player = p;
 }
 void Game::update()
 {

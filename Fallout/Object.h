@@ -9,7 +9,6 @@ class Object
 {
 protected:
 	Coordinates tile;
-	Coordinates renderCoordinates;
 	Animation standingAnimation;
 	Animation walkingAnimation;
 	Coordinates tileWalkingTo;
@@ -26,8 +25,6 @@ public:
 	~Object();
 	int getTileX();
 	int getTileY();
-	void setRenderX(int _x);
-	void setRenderY(int _y);
 	void setPath(int _x, int _y);
 	void setWalking(bool _walking);
 	bool getWalking();

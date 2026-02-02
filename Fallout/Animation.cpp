@@ -53,6 +53,7 @@ sf::Sprite& Animation::getFrame()
 	sf::Sprite sprite(texture);
 	sf::IntRect src({ (frame % framesInARow) * widthOfFrame,(frame / framesInARow) * heightOfFrame }, { widthOfFrame,heightOfFrame });
 	sprite.setTextureRect(src);
+	sprite.setScale({ (float)widthOfFrame,(float)heightOfFrame });
 	waiting++;
 	return sprite;
 }

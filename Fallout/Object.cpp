@@ -18,8 +18,8 @@ Object::Object(int _x, int _y)
 
 Object::Object()
 {
-    tile.x = 0;
-    tile.y = 0;
+    tile.x = -1;
+    tile.y = -1;
     isWalking = 0;
     int pathSize = 0;
     walkingOffsetX = 0;
@@ -29,6 +29,7 @@ Object::Object()
 
 Object::~Object()
 {
+    std::cout << "object deleted" << std::endl;
 }
 
 int Object::getTileX()
@@ -39,16 +40,6 @@ int Object::getTileX()
 int Object::getTileY()
 {
 	return tile.y;
-}
-
-void Object::setRenderX(int _x)
-{
-	renderCoordinates.x = _x;
-}
-
-void Object::setRenderY(int _y)
-{
-	renderCoordinates.y = _y;
 }
 
 void Object::setPath(int _x, int _y)

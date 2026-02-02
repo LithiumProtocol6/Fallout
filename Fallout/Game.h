@@ -24,13 +24,14 @@ private:
 	sf::View camera;//камера
 	void zoom(float delta);//зумить камеру
 	//Игрок
-	Entity player = Entity(20, 20, 100, 100, 10, 10, 50, false);
+	Entity player;
 	//Все сущности
 	std::vector<std::vector<Entity>> entities;
 	int entitySize=0;
 	std::vector<int> entitiesSize;
 	void initEntities(std::vector<Entity> _entities,int _entitySize,int i);
 	void initAllEntities(int _entitySize);
+	int entityLayer;
 public:
 	//Конструкторы/деструкторы
 	Game();
@@ -44,7 +45,8 @@ public:
 
 	//Функции
 	void setMaps(std::vector<std::string> _maps, int _size);
-	void setEntities(std::vector<std::vector<Entity>> _entities, std::vector<int> _entitiesSize, int _entitySize);
+	void setEntities(std::vector<std::vector<Entity>> _entities, std::vector<int> _entitiesSize, int _entitySize,int _entityLayer);
+	void setPlayer(Entity p);
 	void update();
 	void render();
 	void run();
