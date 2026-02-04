@@ -9,6 +9,9 @@ Entity::Entity(int _x, int _y, int _maxHP, int _HP, int _stamina, int _maxStamin
 	accuracy = _accuracy;
 	hasAi = _hasAi;
 	inventorySize = 0;
+	isAggressive = false;
+	equippedWeapon = nullptr;
+	visionRange = 10.0f;
 }
 
 Entity::Entity()
@@ -33,7 +36,107 @@ void Entity::setEntity(int _x, int _y, int _maxHP, int _HP, int _stamina, int _m
 	accuracy = _accuracy;
 	hasAi = _hasAi;
 }
+bool Entity::isTargetInWeaponRange(Entity& target)
+{
+	if (!equippedWeapon)
+	{
+		return false;
+	}
 
+	int dx = target.getTileX() - tile.x;
+	int dy = target.getTileY() - tile.y;
+
+	float dist = static_cast<float>(sqrt(dx * dx + dy * dy));
+	return dist <= equippedWeapon->getRange();
+}
+
+void Entity::trimPathToWeaponRange()
+{
+	if (!equippedWeapon)
+	{
+		return;
+	}
+
+	while (!path.empty())
+	{
+		auto& last = path.back();
+		int dx = last.x - tile.x;
+		int dy = last.y - tile.y;
+		float dist = static_cast<float>(sqrt(dx * dx + dy * dy));
+
+		if (dist <= equippedWeapon->getRange())
+			break;
+
+		path.pop_back();
+	}
+}
+
+bool Entity::canSeePlayer(Entity& player) const
+{
+	if (!hasAi || !isAggressive)
+	{
+		return false;
+	}
+
+	int dx = player.getTileX() - tile.x;
+	int dy = player.getTileY() - tile.y;
+	float dist = sqrt(dx * dx + dy * dy);
+
+	return dist <= visionRange;
+}
+
+void Entity::attack(Entity& target)
+{
+	if (!hasAi || !equippedWeapon || !target.hasAi)
+	{
+		return;
+	}
+
+	std::cout << "Entity attacks player. Damage: " << equippedWeapon->getDamage() << std::endl;
+}
+
+void Entity::updateAI(Entity& player)
+{
+	if (!hasAi || !isAggressive) return;
+
+	setPath(player.getTileX(), player.getTileY());
+
+	if (!canSeePlayer(player))
+	{
+		isWalking = false;
+		return;
+	}
+
+	trimPathToWeaponRange();
+
+	if (!path.empty())
+	{
+		isWalking = true;
+	}
+	else
+	{
+		isWalking = false;
+	}
+
+	if (isTargetInWeaponRange(player))
+	{
+		isWalking = false;
+		attack(player);
+	}
+}
+
+void Entity::setIsAggressive(bool aggressive)
+{
+	isAggressive = aggressive;
+}
+bool Entity::getIsAggressive() const
+{
+	return isAggressive;
+}
+void Entity::setVisionRange(float range)
+{
+	visionRange = range;
+}
 void Entity::setInventory(std::vector<Item> _inventory, int _size)
 {
 	if (_inventory.empty() || _size <= 0) return;

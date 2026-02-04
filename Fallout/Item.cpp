@@ -15,3 +15,15 @@ void Item::operator=(Item& other) {
 	quantity = other.quantity;
 	texture = other.texture;
 }
+int Item::getRange() const
+{
+	return range;
+}
+int Item::getDamage() const
+{
+	return damage;
+}
+std::string Item::getName() const
+{
+	return name;
+}

@@ -15,5 +15,8 @@ public:
 	Item(std::string _name, int _damage, int _range, int _quantity, std::string _texture);
 	Item();
 	void operator=(Item& other);
+	int getRange() const;
+	int getDamage() const;
+	std::string getName() const;
 };
 
