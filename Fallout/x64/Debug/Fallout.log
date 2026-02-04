@@ -1,3 +1,0 @@
-﻿  Game.cpp
-C:\Users\danil\source\repos\Fallout\Fallout\Game.cpp(42,31): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
-  Fallout.vcxproj -> C:\Users\danil\source\repos\Fallout\x64\Debug\Fallout.exe
