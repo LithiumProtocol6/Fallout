@@ -1,0 +1,16 @@
+﻿  Animation.cpp
+C:\Users\danil\source\repos\Fallout\Fallout\Animation.cpp(7,23): warning C4834: удаление возвращаемого значения функции с атрибутом [[nodiscard]]
+C:\Users\danil\source\repos\Fallout\Fallout\Animation.cpp(36,22): warning C4834: удаление возвращаемого значения функции с атрибутом [[nodiscard]]
+  Entity.cpp
+  Fallout.cpp
+  Game.cpp
+C:\Users\danil\source\repos\Fallout\Fallout\Game.cpp(42,31): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+  Item.cpp
+C:\Users\danil\source\repos\Fallout\Fallout\Item.cpp(4,22): warning C4834: удаление возвращаемого значения функции с атрибутом [[nodiscard]]
+C:\Users\danil\source\repos\Fallout\Fallout\Item.cpp(8,22): warning C4834: удаление возвращаемого значения функции с атрибутом [[nodiscard]]
+  MapLoad.cpp
+  Object.cpp
+  tinyxml2.cpp
+  Создание кода...
+C:\Users\danil\source\repos\Fallout\Fallout\Animation.cpp(58,1): warning C4172: возвращаемый адрес локальной переменной или временного : sprite
+  Fallout.vcxproj -> C:\Users\danil\source\repos\Fallout\x64\Debug\Fallout.exe
